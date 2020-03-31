@@ -15,10 +15,10 @@ namespace Assets.Scripts
 
         [JsonProperty("latitude")]
         [KMeansValue]
-        public float Lat { get; set; }
+        public double Lat { get; set; }
 
         [JsonProperty("longitude")]
         [KMeansValue]
-        public float Lon { get; set; }
+        public double Lon { get; set; }
     }
 }

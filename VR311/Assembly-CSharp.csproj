@@ -536,8 +536,8 @@
     <Compile Include="Assets\Scripts\Haversine.cs" />
     <Compile Include="Assets\Scripts\Incident.cs" />
     <Compile Include="Assets\Scripts\KMeans.cs" />
-    <Compile Include="Assets\Scripts\Location.cs" />
     <Compile Include="Assets\Scripts\MapControllerScript.cs" />
+    <Compile Include="Assets\Scripts\MarkerScript.cs" />
     <Compile Include="Assets\UnityARInterface\ARRemote\Scripts\ARRemoteDevice.cs" />
     <Compile Include="Assets\UnityARInterface\ARRemote\Scripts\ARRemoteEditor.cs" />
     <Compile Include="Assets\UnityARInterface\ARRemote\Scripts\ARRemoteEditorInterface.cs" />

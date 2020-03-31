@@ -539,6 +539,8 @@ namespace Mapbox.Unity.Map
 				{
 					SetUpMap();
 				}
+
+				transform.localPosition = Vector3.zero;
 			}
 		}
 

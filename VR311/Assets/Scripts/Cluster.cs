@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mapbox.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,6 @@ namespace Assets.Scripts
     {
         public List<Incident> Incidents { get; set; }
 
-        public Location Location { get; set; }
+        public Vector2d Location { get; set; }
     }
 }

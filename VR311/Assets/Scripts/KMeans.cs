@@ -140,14 +140,14 @@ namespace Assets.Scripts
             }
 
             // Create the final clusters
-            T[][] clusters = new T[clusterCount][];
+            List<T>[] clusters = new List<T>[clusterCount];
             for (int k = 0; k < clusters.Length; k++)
-                clusters[k] = new T[clusterItemCount[k]];
+                clusters[k] = new List<T>(clusterItemCount[k]);
 
             int[] clustersCurIdx = new int[clusterCount];
             for (int i = 0; i < clustering.Length; i++)
             {
-                clusters[clustering[i]][clustersCurIdx[clustering[i]]] = items[i];
+                clusters[clustering[i]].Add(items[i]);
                 ++clustersCurIdx[clustering[i]];
             }
 
@@ -287,7 +287,7 @@ namespace Assets.Scripts
         /// <summary>
         /// The original items arranged into the clusters converged on
         /// </summary>
-        public T[][] Clusters { get; private set; }
+        public List<T>[] Clusters { get; private set; }
 
         /// <summary>
         /// The final mean values used for the clusters. Mostly for debugging purposes.
@@ -306,7 +306,7 @@ namespace Assets.Scripts
         /// </summary>
         public double TotalDistance { get; private set; }
 
-        public KMeansResults(T[][] clusters, double[][] means, int[] centroids, double totalDistance)
+        public KMeansResults(List<T>[] clusters, double[][] means, int[] centroids, double totalDistance)
         {
             Clusters = clusters;
             Means = means;

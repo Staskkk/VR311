@@ -6,50 +6,63 @@
 	using Mapbox.Unity.MeshGeneration.Factories;
 	using Mapbox.Unity.Utilities;
 	using System.Collections.Generic;
+    using Assets.Scripts;
 
-	public class SpawnOnMap : MonoBehaviour
+    public class SpawnOnMap : MonoBehaviour
 	{
 		[SerializeField]
 		AbstractMap _map;
 
 		[SerializeField]
-		[Geocode]
-		string[] _locationStrings;
-		Vector2d[] _locations;
-
-		[SerializeField]
-		float _spawnScale = 100f;
-
-		[SerializeField]
 		GameObject _markerPrefab;
 
-		List<GameObject> _spawnedObjects;
+		[SerializeField]
+		float _widthScale;
 
-		void Start()
+		[SerializeField]
+		float _heightScale;
+
+		public List<MarkerScript> _spawnedObjects = new List<MarkerScript>();
+
+		public void AddMarkers(List<Cluster> clusters, Color color, float width, float maxHeight)
 		{
-			_locations = new Vector2d[_locationStrings.Length];
-			_spawnedObjects = new List<GameObject>();
-			for (int i = 0; i < _locationStrings.Length; i++)
+			foreach (var cluster in clusters)
 			{
-				var locationString = _locationStrings[i];
-				_locations[i] = Conversions.StringToLatLon(locationString);
-				var instance = Instantiate(_markerPrefab);
-				instance.transform.localPosition = _map.GeoToWorldPosition(_locations[i], true);
-				instance.transform.localScale = new Vector3(_spawnScale, _spawnScale, _spawnScale);
+				var instance = Instantiate(_markerPrefab).GetComponent<MarkerScript>();
+				instance.cluster = cluster;
+				instance.transform.localPosition = _map.GeoToWorldPosition(cluster.Location, true);
+				instance.SetParams(color, width, cluster.Incidents.Count / maxHeight);
+				ScaleMarkers(instance);
+				FixPosition(instance);
 				_spawnedObjects.Add(instance);
 			}
 		}
 
 		private void Update()
 		{
-			int count = _spawnedObjects.Count;
-			for (int i = 0; i < count; i++)
+			foreach (var spawnedObject in _spawnedObjects)
 			{
-				var spawnedObject = _spawnedObjects[i];
-				var location = _locations[i];
+				var location = spawnedObject.cluster.Location;
 				spawnedObject.transform.localPosition = _map.GeoToWorldPosition(location, true);
-				spawnedObject.transform.localScale = new Vector3(_spawnScale, _spawnScale, _spawnScale);
+				ScaleMarkers(spawnedObject);
+				FixPosition(spawnedObject);
 			}
+		}
+
+		private void FixPosition(MarkerScript spawnedObject)
+		{
+			spawnedObject.transform.localPosition =
+				new Vector3(spawnedObject.transform.localPosition.x,
+				spawnedObject.transform.localPosition.y + spawnedObject.transform.localScale.y,
+				spawnedObject.transform.localPosition.z);
+		}
+
+		private void ScaleMarkers(MarkerScript spawnedObject)
+		{
+			spawnedObject.transform.localScale = new Vector3(
+				_markerPrefab.transform.localScale.x * spawnedObject.width * _widthScale,
+				_markerPrefab.transform.localScale.y * spawnedObject.height * _heightScale,
+				_markerPrefab.transform.localScale.z * spawnedObject.width * _widthScale);
 		}
 	}
 }
