@@ -530,6 +530,14 @@
     <Compile Include="Assets\MapboxAR\Unity\Ar\SnapAlignmentStrategy.cs" />
     <Compile Include="Assets\MapboxAR\Unity\Ar\Utilities\PlotRoute.cs" />
     <Compile Include="Assets\Scripts\CameraControllerScript.cs" />
+    <Compile Include="Assets\Scripts\Cluster.cs" />
+    <Compile Include="Assets\Scripts\DataManagerScript.cs" />
+    <Compile Include="Assets\Scripts\FakeCameraTransformScript.cs" />
+    <Compile Include="Assets\Scripts\Haversine.cs" />
+    <Compile Include="Assets\Scripts\Incident.cs" />
+    <Compile Include="Assets\Scripts\KMeans.cs" />
+    <Compile Include="Assets\Scripts\Location.cs" />
+    <Compile Include="Assets\Scripts\MapControllerScript.cs" />
     <Compile Include="Assets\UnityARInterface\ARRemote\Scripts\ARRemoteDevice.cs" />
     <Compile Include="Assets\UnityARInterface\ARRemote\Scripts\ARRemoteEditor.cs" />
     <Compile Include="Assets\UnityARInterface\ARRemote\Scripts\ARRemoteEditorInterface.cs" />
@@ -648,17 +656,11 @@
     <Reference Include="Unity.CollabProxy.Editor">
       <HintPath>D:/Projects/VR311/VR311/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>D:/Projects/VR311/VR311/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/Projects/VR311/VR311/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>D:/Projects/VR311/VR311/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.XR.LegacyInputHelpers">
       <HintPath>D:/Projects/VR311/VR311/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>D:/Projects/VR311/VR311/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.SpatialTracking">
       <HintPath>D:/Projects/VR311/VR311/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
@@ -666,8 +668,14 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>D:/Projects/VR311/VR311/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>D:/Projects/VR311/VR311/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
       <HintPath>D:/Projects/VR311/VR311/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>D:/Projects/VR311/VR311/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>D:/Programs/Unity/2019.2.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -846,26 +854,26 @@
     <Reference Include="UnityEngine.XRModule">
       <HintPath>D:/Programs/Unity/2019.2.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
     </Reference>
-    <Reference Include="Mapbox.Json">
-      <HintPath>D:/Projects/VR311/VR311/Assets/Mapbox/Core/Plugins/ThirdParty/Mapbox.Json/Net35/Mapbox.Json.dll</HintPath>
+    <Reference Include="MapboxAccountsUnity">
+      <HintPath>D:/Projects/VR311/VR311/Assets/Mapbox/Core/Plugins/Mapbox/MapboxAccounts/net35/MapboxAccountsUnity.dll</HintPath>
+    </Reference>
+    <Reference Include="Mapbox.VectorTile.ExtensionMethods">
+      <HintPath>D:/Projects/VR311/VR311/Assets/Mapbox/Core/Plugins/Mapbox/vector-tile-cs/net46/Mapbox.VectorTile.ExtensionMethods.dll</HintPath>
     </Reference>
     <Reference Include="Mapbox.VectorTile.Geometry">
       <HintPath>D:/Projects/VR311/VR311/Assets/Mapbox/Core/Plugins/Mapbox/vector-tile-cs/net46/Mapbox.VectorTile.Geometry.dll</HintPath>
     </Reference>
-    <Reference Include="Mapbox.IO.Compression">
-      <HintPath>D:/Projects/VR311/VR311/Assets/Mapbox/Core/Plugins/ThirdParty/Mapbox.IO.Compression/net35/Mapbox.IO.Compression.dll</HintPath>
-    </Reference>
-    <Reference Include="MapboxAccountsUnity">
-      <HintPath>D:/Projects/VR311/VR311/Assets/Mapbox/Core/Plugins/Mapbox/MapboxAccounts/net35/MapboxAccountsUnity.dll</HintPath>
+    <Reference Include="Mapbox.VectorTile.PbfReader">
+      <HintPath>D:/Projects/VR311/VR311/Assets/Mapbox/Core/Plugins/Mapbox/vector-tile-cs/net46/Mapbox.VectorTile.PbfReader.dll</HintPath>
     </Reference>
     <Reference Include="Mapbox.VectorTile.VectorTileReader">
       <HintPath>D:/Projects/VR311/VR311/Assets/Mapbox/Core/Plugins/Mapbox/vector-tile-cs/net46/Mapbox.VectorTile.VectorTileReader.dll</HintPath>
     </Reference>
-    <Reference Include="Mapbox.VectorTile.PbfReader">
-      <HintPath>D:/Projects/VR311/VR311/Assets/Mapbox/Core/Plugins/Mapbox/vector-tile-cs/net46/Mapbox.VectorTile.PbfReader.dll</HintPath>
+    <Reference Include="Mapbox.IO.Compression">
+      <HintPath>D:/Projects/VR311/VR311/Assets/Mapbox/Core/Plugins/ThirdParty/Mapbox.IO.Compression/net35/Mapbox.IO.Compression.dll</HintPath>
     </Reference>
-    <Reference Include="Mapbox.VectorTile.ExtensionMethods">
-      <HintPath>D:/Projects/VR311/VR311/Assets/Mapbox/Core/Plugins/Mapbox/vector-tile-cs/net46/Mapbox.VectorTile.ExtensionMethods.dll</HintPath>
+    <Reference Include="Mapbox.Json">
+      <HintPath>D:/Projects/VR311/VR311/Assets/Mapbox/Core/Plugins/ThirdParty/Mapbox.Json/Net35/Mapbox.Json.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>D:/Programs/Unity/2019.2.21f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

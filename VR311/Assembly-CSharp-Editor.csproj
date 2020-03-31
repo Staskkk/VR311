@@ -188,17 +188,11 @@
     <Reference Include="Unity.CollabProxy.Editor">
       <HintPath>D:/Projects/VR311/VR311/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>D:/Projects/VR311/VR311/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/Projects/VR311/VR311/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>D:/Projects/VR311/VR311/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.XR.LegacyInputHelpers">
       <HintPath>D:/Projects/VR311/VR311/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>D:/Projects/VR311/VR311/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.SpatialTracking">
       <HintPath>D:/Projects/VR311/VR311/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
@@ -206,8 +200,14 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>D:/Projects/VR311/VR311/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>D:/Projects/VR311/VR311/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
       <HintPath>D:/Projects/VR311/VR311/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>D:/Projects/VR311/VR311/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>D:/Programs/Unity/2019.2.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -401,26 +401,26 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/16.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
-    <Reference Include="Mapbox.Json">
-      <HintPath>D:/Projects/VR311/VR311/Assets/Mapbox/Core/Plugins/ThirdParty/Mapbox.Json/Net35/Mapbox.Json.dll</HintPath>
+    <Reference Include="MapboxAccountsUnity">
+      <HintPath>D:/Projects/VR311/VR311/Assets/Mapbox/Core/Plugins/Mapbox/MapboxAccounts/net35/MapboxAccountsUnity.dll</HintPath>
+    </Reference>
+    <Reference Include="Mapbox.VectorTile.ExtensionMethods">
+      <HintPath>D:/Projects/VR311/VR311/Assets/Mapbox/Core/Plugins/Mapbox/vector-tile-cs/net46/Mapbox.VectorTile.ExtensionMethods.dll</HintPath>
     </Reference>
     <Reference Include="Mapbox.VectorTile.Geometry">
       <HintPath>D:/Projects/VR311/VR311/Assets/Mapbox/Core/Plugins/Mapbox/vector-tile-cs/net46/Mapbox.VectorTile.Geometry.dll</HintPath>
     </Reference>
-    <Reference Include="Mapbox.IO.Compression">
-      <HintPath>D:/Projects/VR311/VR311/Assets/Mapbox/Core/Plugins/ThirdParty/Mapbox.IO.Compression/net35/Mapbox.IO.Compression.dll</HintPath>
-    </Reference>
-    <Reference Include="MapboxAccountsUnity">
-      <HintPath>D:/Projects/VR311/VR311/Assets/Mapbox/Core/Plugins/Mapbox/MapboxAccounts/net35/MapboxAccountsUnity.dll</HintPath>
+    <Reference Include="Mapbox.VectorTile.PbfReader">
+      <HintPath>D:/Projects/VR311/VR311/Assets/Mapbox/Core/Plugins/Mapbox/vector-tile-cs/net46/Mapbox.VectorTile.PbfReader.dll</HintPath>
     </Reference>
     <Reference Include="Mapbox.VectorTile.VectorTileReader">
       <HintPath>D:/Projects/VR311/VR311/Assets/Mapbox/Core/Plugins/Mapbox/vector-tile-cs/net46/Mapbox.VectorTile.VectorTileReader.dll</HintPath>
     </Reference>
-    <Reference Include="Mapbox.VectorTile.PbfReader">
-      <HintPath>D:/Projects/VR311/VR311/Assets/Mapbox/Core/Plugins/Mapbox/vector-tile-cs/net46/Mapbox.VectorTile.PbfReader.dll</HintPath>
+    <Reference Include="Mapbox.IO.Compression">
+      <HintPath>D:/Projects/VR311/VR311/Assets/Mapbox/Core/Plugins/ThirdParty/Mapbox.IO.Compression/net35/Mapbox.IO.Compression.dll</HintPath>
     </Reference>
-    <Reference Include="Mapbox.VectorTile.ExtensionMethods">
-      <HintPath>D:/Projects/VR311/VR311/Assets/Mapbox/Core/Plugins/Mapbox/vector-tile-cs/net46/Mapbox.VectorTile.ExtensionMethods.dll</HintPath>
+    <Reference Include="Mapbox.Json">
+      <HintPath>D:/Projects/VR311/VR311/Assets/Mapbox/Core/Plugins/ThirdParty/Mapbox.Json/Net35/Mapbox.Json.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>D:/Projects/VR311/VR311/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
