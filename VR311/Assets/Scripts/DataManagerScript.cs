@@ -22,56 +22,149 @@ public class DataManagerScript : MonoBehaviour
 
     public int iterationCount;
 
+    private class BarConfig
+    {
+        public Color Color { get; set; }
+
+        public double Width { get; set; }
+    }
+
     void Start()
     {
-        string filePath = Application.dataPath + "/Data/data.json";
-        JArray array = JArray.Parse(File.ReadAllText(filePath));
-        Dictionary<DateTime, List<Incident>> dicIncidents = new Dictionary<DateTime, List<Incident>>();
-        foreach (var incident in array.ToObject<IEnumerable<Incident>>())
+        var time1 = Time.realtimeSinceStartup;
+        string filePath = Application.streamingAssetsPath + "/Data/data.json";
+        var array = JArray.Parse(File.ReadAllText(filePath));
+        Debug.Log("Time1: " + (Time.realtimeSinceStartup - time1));
+        var time2 = Time.realtimeSinceStartup;
+        var incidents = array.ToObject<List<Incident>>();
+        var sortedDates = new SortedSet<DateTime>();
+        foreach (var incident in incidents)
         {
-            var incDate = incident.CreatedDate.Date;
-            if (!dicIncidents.ContainsKey(incDate))
+            sortedDates.Add(incident.CreatedDate.Date);
+        }
+
+        var barConfigs = new Dictionary<DateTime, BarConfig>(7);
+        int confIndex = 0;
+        foreach (var createdDate in sortedDates.Reverse())
+        {
+            if (!barConfigs.ContainsKey(createdDate))
             {
-                dicIncidents.Add(incDate, new List<Incident>(new Incident[] { incident }));
+                barConfigs.Add(createdDate, new BarConfig() {
+                    Color = markerColors[confIndex],
+                    Width = 0.5f
+                });
+                confIndex++;
+                if (confIndex >= markerColors.Length)
+                {
+                    confIndex = markerColors.Length - 1;
+                }
+            }
+        }
+
+        var bigClusters = new Dictionary<int, BigCluster>(100);
+
+        foreach (var incident in incidents)
+        {
+            if (!bigClusters.ContainsKey(incident.ZipCode))
+            {
+                bigClusters.Add(incident.ZipCode, new BigCluster() {
+                    Incidents = new Dictionary<DateTime, List<Incident>>() { { incident.CreatedDate.Date, new List<Incident>() { incident } } },
+                    Location = new Vector2d(incident.Lat, incident.Lon) });
             }
             else
             {
-                dicIncidents[incDate].Add(incident);
+                var cluster = bigClusters[incident.ZipCode];
+                var createdDate = incident.CreatedDate.Date;
+                if (!cluster.Incidents.ContainsKey(createdDate))
+                {
+                    cluster.Incidents.Add(createdDate, new List<Incident>() { incident });
+                }
+                else
+                {
+                    cluster.Incidents[createdDate].Add(incident);
+                }
+                
+                cluster.Location += new Vector2d(incident.Lat, incident.Lon);
             }
         }
 
-        float maxHeight = -1;
-        var kMeansResults = new List<KMeansResults<Incident>>();
-        foreach (var incidents in dicIncidents.Values)
+        float maxHeight = bigClusters.Values.Max(el => el.Incidents.Values.Max(el2 => el2.Count));
+        foreach (var bigCluster in bigClusters.Values)
         {
-            var kMeansResult = KMeans.Cluster(incidents.ToArray(),
-                clusterCount,
-                iterationCount,
-                (p, c) => { return Haversine.Distance(p[0], p[1], c[0], c[1]); });
-            kMeansResults.Add(kMeansResult);
-            float localMax = kMeansResult.Clusters.Max(el => el.Count);
-            if (maxHeight < localMax)
+            long count = 0;
+            foreach (var cluster in bigCluster.Incidents.Values)
             {
-                maxHeight = localMax;
+                count += cluster.Count;
             }
+
+            bigCluster.Location /= count;
         }
 
-        int index = 0;
-        foreach (var kMeansResult in kMeansResults)
+        ////var minLat = bigClusters.Values.Min(el => el.Location.x);
+        ////var minLon = bigClusters.Values.Min(el => el.Location.y);
+        ////var maxLat = bigClusters.Values.Max(el => el.Location.x);
+        ////var maxLon = bigClusters.Values.Max(el => el.Location.y);
+        ////spawnManager.SetMapLatLon(new Vector2d() { x = (minLat + maxLat) / 2, y = (minLon + maxLon) / 2 });
+
+
+        double radius = 0.002f;
+        double radiusRatio = 1.35f;
+
+        foreach (var bigCluster in bigClusters.Values)
         {
-            var clusters = new List<Cluster>();
-            foreach (var data in kMeansResult.Clusters)
+            var index = 0;
+            foreach (var cluster in bigCluster.Incidents)
             {
-                clusters.Add(new Cluster { Incidents = data });
-            }
+                var barConfig = barConfigs[cluster.Key];
 
-            for (int i = 0; i < clusters.Count; ++i)
-            {
-                clusters[i].Location = new Vector2d { x = kMeansResult.Means[i][0], y = kMeansResult.Means[i][1] };
+                double latShift = radius * Math.Cos(index * 2 * Math.PI / bigCluster.Incidents.Count);
+                double lonShift = radius * radiusRatio * Math.Sin(index * 2 * Math.PI / bigCluster.Incidents.Count);
+                spawnManager.AddMarker(
+                    new Cluster() {
+                        Incidents = cluster.Value,
+                        Location = new Vector2d(bigCluster.Location.x + latShift, bigCluster.Location.y + lonShift)
+                    },
+                    barConfig.Color,
+                    0.5f,
+                    maxHeight);
+                index++;
             }
-
-            spawnManager.AddMarkers(clusters, markerColors[index], markerWidths[index], maxHeight);
-            index++;
         }
+
+        Debug.Log("Time2: " + (Time.realtimeSinceStartup - time2));
+
+
+        //var kMeansResults = new List<KMeansResults<Incident>>();
+        //foreach (var incidents in dicIncidents.Values)
+        //{
+        //    var kMeansResult = KMeans.Cluster(incidents.ToArray(),
+        //        clusterCount,
+        //        iterationCount,
+        //        (p, c) => { return Haversine.Distance(p[0], p[1], c[0], c[1]); });
+        //    kMeansResults.Add(kMeansResult);
+        //    float localMax = kMeansResult.Clusters.Max(el => el.Count);
+        //    if (maxHeight < localMax)
+        //    {
+        //        maxHeight = localMax;
+        //    }
+        //}
+
+        //int index = 0;
+        //foreach (var kMeansResult in kMeansResults)
+        //{
+        //    var clusters = new List<Cluster>();
+        //    foreach (var data in kMeansResult.Clusters)
+        //    {
+        //        clusters.Add(new Cluster { Incidents = data });
+        //    }
+
+        //    for (int i = 0; i < clusters.Count; ++i)
+        //    {
+        //        clusters[i].Location = new Vector2d { x = kMeansResult.Means[i][0], y = kMeansResult.Means[i][1] };
+        //    }
+
+        //    spawnManager.AddMarkers(clusters, markerColors[index], markerWidths[index], maxHeight);
+        //    index++;
+        //}
     }
 }

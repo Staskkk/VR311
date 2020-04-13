@@ -20,5 +20,9 @@ namespace Assets.Scripts
         [JsonProperty("longitude")]
         [KMeansValue]
         public double Lon { get; set; }
+
+        [JsonProperty("incident_zip")]
+        [KMeansValue]
+        public int ZipCode { get; set; }
     }
 }

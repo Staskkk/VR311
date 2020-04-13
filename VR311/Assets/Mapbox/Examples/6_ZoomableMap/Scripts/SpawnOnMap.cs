@@ -24,18 +24,28 @@
 
 		public List<MarkerScript> _spawnedObjects = new List<MarkerScript>();
 
+		public void SetMapLatLon(Vector2d center)
+		{
+			_map.SetCenterLatitudeLongitude(center);
+		}
+
 		public void AddMarkers(List<Cluster> clusters, Color color, float width, float maxHeight)
 		{
 			foreach (var cluster in clusters)
 			{
-				var instance = Instantiate(_markerPrefab).GetComponent<MarkerScript>();
-				instance.cluster = cluster;
-				instance.transform.localPosition = _map.GeoToWorldPosition(cluster.Location, true);
-				instance.SetParams(color, width, cluster.Incidents.Count / maxHeight);
-				ScaleMarkers(instance);
-				FixPosition(instance);
-				_spawnedObjects.Add(instance);
+				AddMarker(cluster, color, width, maxHeight);
 			}
+		}
+
+		public void AddMarker(Cluster cluster, Color color, float width, float maxHeight)
+		{
+			var instance = Instantiate(_markerPrefab).GetComponent<MarkerScript>();
+			instance.cluster = cluster;
+			instance.transform.localPosition = _map.GeoToWorldPosition(cluster.Location, true);
+			instance.SetParams(color, width, cluster.Incidents.Count / maxHeight);
+			ScaleMarkers(instance);
+			FixPosition(instance);
+			_spawnedObjects.Add(instance);
 		}
 
 		private void Update()

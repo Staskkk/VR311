@@ -1131,7 +1131,7 @@ namespace Mapbox.Unity.Map
 
 		public virtual void SetCenterLatitudeLongitude(Vector2d centerLatitudeLongitude)
 		{
-			_options.locationOptions.latitudeLongitude = string.Format("{0}, {1}", centerLatitudeLongitude.x, centerLatitudeLongitude.y);
+			_options.locationOptions.latitudeLongitude = string.Format(CultureInfo.InvariantCulture, "{0}, {1}", centerLatitudeLongitude.x, centerLatitudeLongitude.y);
 			_centerLatitudeLongitude = centerLatitudeLongitude;
 		}
 
