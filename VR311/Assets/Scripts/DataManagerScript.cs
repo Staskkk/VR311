@@ -33,6 +33,7 @@ public class DataManagerScript : MonoBehaviour
     {
         var time1 = Time.realtimeSinceStartup;
         string filePath = Application.streamingAssetsPath + "/Data/data.json";
+        // Load the data from the json file
         var array = JArray.Parse(File.ReadAllText(filePath));
         Debug.Log("Time1: " + (Time.realtimeSinceStartup - time1));
         var time2 = Time.realtimeSinceStartup;
@@ -61,8 +62,8 @@ public class DataManagerScript : MonoBehaviour
             }
         }
 
+        // Put data in big clusters
         var bigClusters = new Dictionary<int, BigCluster>(100);
-
         foreach (var incident in incidents)
         {
             if (!bigClusters.ContainsKey(incident.ZipCode))
@@ -88,7 +89,10 @@ public class DataManagerScript : MonoBehaviour
             }
         }
 
+        // Get max height of each clster for scaling
         float maxHeight = bigClusters.Values.Max(el => el.Incidents.Values.Max(el2 => el2.Count));
+
+        // Get average location of each big cluster
         foreach (var bigCluster in bigClusters.Values)
         {
             long count = 0;
@@ -100,16 +104,10 @@ public class DataManagerScript : MonoBehaviour
             bigCluster.Location /= count;
         }
 
-        ////var minLat = bigClusters.Values.Min(el => el.Location.x);
-        ////var minLon = bigClusters.Values.Min(el => el.Location.y);
-        ////var maxLat = bigClusters.Values.Max(el => el.Location.x);
-        ////var maxLon = bigClusters.Values.Max(el => el.Location.y);
-        ////spawnManager.SetMapLatLon(new Vector2d() { x = (minLat + maxLat) / 2, y = (minLon + maxLon) / 2 });
-
-
         double radius = 0.002f;
         double radiusRatio = 1.35f;
 
+        // Visualize all clusters in circles of big clusters
         foreach (var bigCluster in bigClusters.Values)
         {
             var index = 0;

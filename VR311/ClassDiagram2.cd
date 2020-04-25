@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Alphabetical">
+  <Class Name="CameraControllerScript">
+    <Position X="1.5" Y="2.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAkAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\CameraControllerScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataManagerScript">
+    <Position X="7.75" Y="2.25" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="DataManagerScript.BarConfig">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\DataManagerScript.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAgAAAAAAAAAAAAAAAAAABAAAAEAAECAAA=</HashCode>
+      <FileName>Assets\Scripts\DataManagerScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FakeCameraTransformScript">
+    <Position X="1.25" Y="4.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQABAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\FakeCameraTransformScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapControllerScript">
+    <Position X="5.5" Y="2.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AASABAAgAACAAAAAACAgAAgAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\MapControllerScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MarkerScript">
+    <Position X="9.75" Y="2.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAQAQAAAAAAABAAIAACAAAAAAABAAEA=</HashCode>
+      <FileName>Assets\Scripts\MarkerScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.Scripts.BigCluster">
+    <Position X="3.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\BigCluster.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.Scripts.Cluster">
+    <Position X="9.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Cluster.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.Scripts.Incident">
+    <Position X="3.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAgAAAABAgAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Incident.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
